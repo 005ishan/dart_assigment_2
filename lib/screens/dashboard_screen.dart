@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RichText;
 import 'package:flutter_assignment_2/screens/area_of_circle.dart';
 import 'package:flutter_assignment_2/screens/arithmetic_screen.dart';
+import 'package:flutter_assignment_2/screens/flutter_layout_screen.dart';
 import 'package:flutter_assignment_2/screens/palindrome.dart';
 import 'package:flutter_assignment_2/screens/simple_Interest_screen.dart';
+import 'package:flutter_assignment_2/screens/rich_text_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -73,6 +75,34 @@ class DashboardScreen extends StatelessWidget {
                   ),
                 );
           }, child: Text("Palindrome of a num Screen", style: TextStyle(color: Colors.white),))),
+          SizedBox(height: 20,),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 234, 242, 6),
+              ),onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const RichTextScreen(),
+                  ),
+                );
+          }, child: Text("Rich Text Screen", style: TextStyle(color: Colors.white),))),
+          SizedBox(height: 20,),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 32, 0, 212),
+              ),onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const FlutterLayoutScreen(),
+                  ),
+                );
+          }, child: Text("Flutter Layout Screen", style: TextStyle(color: Colors.white),))),
         ],
       ),),
     );

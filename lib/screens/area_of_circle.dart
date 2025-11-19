@@ -34,7 +34,15 @@ class _MyWidgetState extends State<AreaOfCircleScreen> {
               },
               decoration: InputDecoration(
                 labelText: "Enter radius",
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green)
+                ),
               ),
             ),
             SizedBox(height: 20,),
