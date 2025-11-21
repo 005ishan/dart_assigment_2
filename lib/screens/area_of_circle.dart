@@ -8,58 +8,90 @@ class AreaOfCircleScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<AreaOfCircleScreen> {
-  double radius = 0;
+  TextEditingController radiusController = TextEditingController();
   double result = 0;
+
+  // Global key for form state
+  final _formkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    radiusController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Area of Circle", 
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,)
+        title: Text(
+          "Area of Circle",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-          centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 28, 212, 0),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 28, 212, 0),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextField(
-              onChanged: (value) {
-                radius = double.parse(value);
-              },
-              decoration: InputDecoration(
-                labelText: "Enter radius",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.green)
+        child: Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: radiusController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter radius';
+                  }
+                  final parsed = double.tryParse(value);
+                  if (parsed == null) {
+                    return 'Enter a valid number';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Enter radius",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20,),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(onPressed:(){
-                setState(() {
-                  result = 3.14 * radius * radius;
-                });
-              }, child: Text("Calculate")),
-            ),
-            SizedBox(height: 20,),
-            Text("Result $result"),
-            
-          ],
+              SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formkey.currentState!.validate()) {
+                      setState(() {
+                        final radius = double.parse(radiusController.text);
+                        result = (3.14 * radius * radius).ceilToDouble();
+                      });
+                    }
+                  },
+                  child: Text("Calculate"),
+                ),
+              ),
+              SizedBox(height: 20),
+              Text("Result $result"),
+            ],
+          ),
         ),
       ),
-      );
+    );
   }
 }
