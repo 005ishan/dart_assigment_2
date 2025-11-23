@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' hide RichText;
 import 'package:flutter_assignment_2/screens/area_of_circle.dart';
 import 'package:flutter_assignment_2/screens/arithmetic_screen.dart';
+import 'package:flutter_assignment_2/screens/container_screen.dart';
+import 'package:flutter_assignment_2/screens/flexible_expanded_screen.dart';
 import 'package:flutter_assignment_2/screens/flutter_layout_screen.dart';
 import 'package:flutter_assignment_2/screens/palindrome.dart';
 import 'package:flutter_assignment_2/screens/simple_Interest_screen.dart';
@@ -103,6 +105,32 @@ class DashboardScreen extends StatelessWidget {
                   ),
                 );
           }, child: Text("Flutter Layout Screen", style: TextStyle(color: Colors.white),))),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 32, 0, 212),
+              ),onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const ContainerScreen(),
+                  ),
+                );
+          }, child: Text("container Screen", style: TextStyle(color: Colors.white),))),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 32, 0, 212),
+              ),onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const FlexibleExpandedScreen(),
+                  ),
+                );
+          }, child: Text("flexible expanded Screen", style: TextStyle(color: Colors.white),))),
         ],
       ),),
     );
